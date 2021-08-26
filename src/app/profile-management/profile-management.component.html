@@ -1,0 +1,7 @@
+<input type="text" placeholder="search users by name" (change)="filterUsers()" [formControl]="searchInput">
+<div class="buttons">
+    <button class="button is-primary" (click)="getUserInformation()">Primary</button>
+</div>
+<div *ngIf="(usersList | async) as users">
+    <app-user-profile [UserInfo]="user" *ngFor="let user of users"></app-user-profile>
+</div>
