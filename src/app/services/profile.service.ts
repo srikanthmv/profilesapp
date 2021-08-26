@@ -12,7 +12,6 @@ export class ProfileService {
   constructor(private http: HttpClient) { }
 
   getUserInfo(): Observable<UserResponseModel> {
-    // make api call to get the user details
     return this.http.get(environment.baseApiUrl) as Observable<UserResponseModel>
   }
 }

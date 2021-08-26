@@ -20,7 +20,6 @@ export class ProfileManagementComponent implements OnInit {
   constructor(private profileService: ProfileService) {
     this.manageUserSearchAction()
     this.deafultUsersCountAsList = range(1, CONSTANTS.DEFAULT_USERS_TO_LOAD)
-    console.log(this.deafultUsersCountAsList);
   }
 
   ngOnInit(): void {
@@ -38,7 +37,7 @@ export class ProfileManagementComponent implements OnInit {
     });
   }
 
-  getUserInformation() {
+  getNewUserInstantly(): void {
     this.profileService.getUserInfo().subscribe((resp) => {
         if (resp) {
           this.findAndUpdateUsersList(resp);
@@ -55,6 +54,9 @@ export class ProfileManagementComponent implements OnInit {
     this.usersList.next(filteredUsers);
   }
 
+  /* this method gets the default users based on the count from constants file
+  the given api is always returning only one user in the result set. so, here i am making the same api call
+  multiple times to get more users at a time. */
   getDefaultUsers() {
     from(this.deafultUsersCountAsList)
     .pipe(mergeMap((id: number) => this.profileService.getUserInfo()))
@@ -62,17 +64,24 @@ export class ProfileManagementComponent implements OnInit {
       userInfo => {
         this.findAndUpdateUsersList(userInfo);
       },
-      err => console.log("Error while fetching user information", err),
-      () => console.log("Completed all the users fetch")
+      err => console.log("Error while fetching user information", err)
     );
   }
 
+  /* checks the user duplication based on the user id, and adds the user into the list */
   findAndUpdateUsersList(usersResponse: UserResponseModel) {
     let dupUserFound = this.usersList.getValue().find((user) => user.login.uuid === usersResponse.results[0].login.uuid)
     if (dupUserFound === undefined) {
       let currentUsersList = this.usersList.getValue();
       currentUsersList.push(usersResponse.results[0])
       this.usersList.next(currentUsersList);
+    }
+  }
+
+  resetSearch(): void {
+    if (this.searchInput.value !== "") {
+      this.searchInput.setValue('');
+      this.usersList.next([]);
     }
   }
 

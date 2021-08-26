@@ -1,4 +1,32 @@
-
-<div>
-    <p>{{ UserInfo?.name?.first! + UserInfo?.name?.last! }}</p>
+<div class="card has-text-white has-background-dark profile-card">
+  <div class="card-image-section">
+    <figure class="image is-128x128">
+      <img class="is-rounded user-avatar" [alt]="UserInfo?.login?.username!"
+           loading="lazy"
+           [src]="UserInfo?.picture?.large">
+    </figure>
+  </div>
+  <div class="card-content">
+    <div class="media">
+      <div class="media-content">
+        <p class="title is-4 has-text-centered has-text-white">{{ UserInfo?.name?.first! }} {{ UserInfo?.name?.last! }}</p>
+      </div>
+    </div>
+    <div class="content">
+            <span class="icon-text">
+              <span class="icon">
+                <span class="material-icons"><b>email</b></span>
+              </span>
+              <span>email:</span>
+            </span>
+      <p [title]="UserInfo?.email!" class="email-text">{{ UserInfo?.email! }}</p>
+      <span class="icon-text">
+              <span class="icon">
+                <span class="material-icons">account_circle</span>
+              </span>
+              <span>username:</span>
+            </span>
+      <p>{{ UserInfo?.login?.username! }}</p>
+    </div>
+  </div>
 </div>

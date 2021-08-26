@@ -1,1 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
+
+:root {
+  --primary-button-color: linear-gradient(to right, #FF512F 0%, #DD2476 51%, #FF512F 100%);
+  --card-background-color: linear-gradient(135deg, #536976 10%, #292E49 100%);
+  --body-background-color: #29323c;
+}
+
+html, body {
+  background-color: var(--body-background-color) !important;;
+  height: 100%;
+}
+
+button, .button {
+  background-image: var(--primary-button-color) !important;
+  text-transform: uppercase;
+  transition: 0.5s;
+  color: white;
+}
+
+.button:hover {
+background-position: right center; /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+}

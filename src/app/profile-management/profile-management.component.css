@@ -1,0 +1,13 @@
+.add-profile-card {
+  background-image: var(--primary-button-color);
+  min-height: 349px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.add-profile-card__add-button {
+  font-weight: 400;
+  font-size: 50px;
+}
